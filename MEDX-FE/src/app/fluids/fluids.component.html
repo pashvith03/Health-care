@@ -1,0 +1,68 @@
+<app-home></app-home>
+
+<div class="fluid-container">
+
+  <div class="page-header">
+    <h2 class="section-title">Fluids Assigned to Care Units</h2>
+    <button class="create-btn" (click)="openFluidPopup()">
+      ➕ Add Fluid
+    </button>
+  </div>
+
+  <p class="success-msg" *ngIf="successMsg">{{ successMsg }}</p>
+  <p class="error-msg" *ngIf="errorMsg">{{ errorMsg }}</p>
+
+  <div class="list-container">
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>S.No</th>
+          <th>Fluid Name</th>
+          <th>Care Unit Name</th>
+          <th>Actions</th> </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let fluid of fluidsArray; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ fluid.fluidName }}</td>
+          <td>{{ fluid.careUnitName }}</td>
+          <td class="table-actions">
+            <button class="edit-btn" (click)="onEdit(i)">EDIT</button>
+            <button class="delete-btn" (click)="onDelete(fluid)">DELETE</button>
+          </td>
+        </tr>
+        <tr *ngIf="fluidsArray.length === 0">
+          <td colspan="4" class="empty-table-msg">No fluids have been added yet.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div *ngIf="isFluidOpen" class="popup-overlay">
+  <div class="popup">
+    <h1 class="popup-title">
+      {{ isEditMode ? 'Edit Fluid' : 'Add Fluid & Assign Care Unit' }}
+    </h1>
+    <form [formGroup]="fluidForm" class="popup-form" (ngSubmit)="onFluidSubmit()">
+
+      <label for="fluidName" class="popup-label">Fluid Name</label>
+      <input id="fluidName" formControlName="fluidName" type="text" class="popup-input" placeholder="e.g., Normal Saline" />
+
+      <label for="careUnitSelect" class="popup-label">Select Care Unit</label>
+      <select id="careUnitSelect" formControlName="careUnitName" class="popup-input">
+        <option value="" disabled>-- Select a Care Unit --</option>
+        <option *ngFor="let unit of careUnits" [value]="unit.name">
+          {{ unit.name }}
+        </option>
+      </select>
+
+      <div class="popup-buttons">
+        <button type="button" class="popup-cancel" (click)="closeFluidPopup()">Cancel</button>
+        <button type="submit" class="popup-submit">
+          {{ isEditMode ? 'Update' : 'Submit' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

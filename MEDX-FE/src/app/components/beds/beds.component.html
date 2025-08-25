@@ -1,0 +1,42 @@
+<app-home></app-home>
+<div class="careunit-container">
+
+  <button class="create-btn" (click)="openPopup()">Add Beds</button>
+
+  <!-- Popup -->
+  <div *ngIf="isopen" class="popup-overlay">
+    <div class="popup">
+      <h1 class="popup-title">
+        {{ isEditMode ? 'EDIT BED' : 'ADD A NEW BED' }}
+      </h1>
+
+      <form [formGroup]="careUnitForm" class="popup-form" (ngSubmit)="onSubmit()">
+        <label for="bedName" class="popup-label">Bed Name:</label>
+        <input id="bedName" formControlName="bedName" type="text" class="popup-input" />
+        <div class="popup-buttons">
+          <button type="submit" class="popup-submit">
+            {{ isEditMode ? 'Update' : 'Submit' }}
+          </button>
+          <button type="button" class="popup-cancel" (click)="closePopup()">Cancel</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="careunit-list">
+    <table class="careunit-table">
+      <tr>
+        <th>S.No</th>
+        <th>Bed Name</th>
+        <th>Actions</th>
+      </tr>
+      <tr *ngFor="let bed of bedsArray; let i = index">
+        <td>{{ i + 1 }}</td>
+        <td>{{ bed.name }}</td>
+        <td class="table-actions">
+          <button class="edit-btn" (click)="onEdit(i)">EDIT</button>
+          <button class="delete-btn" (click)="onDelete(bed)">DELETE</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

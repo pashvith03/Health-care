@@ -1,0 +1,41 @@
+<app-home></app-home>
+<div class="careunit-container">
+
+    <button class="create-btn" (click)="openPopup()">Create Care Units</button>
+    <div *ngIf="isopen" class="popup-overlay">
+        <div class="popup">
+            <h1 class="popup-title">
+                {{ isEditMode ? 'EDIT CARE UNIT' : 'CREATE A CARE UNIT' }}
+            </h1>
+            <form [formGroup]="careUnitForm" class="popup-form" (ngSubmit)="onSubmit()">
+                <label for="careUnitName" class="popup-label">Care Unit Name:</label>
+                <input id="careUnitName" formControlName="careUnitName" type="text"
+                       class="popup-input" />
+                <div class="popup-buttons">
+                    <button type="submit" class="popup-submit">
+                        {{ isEditMode ? 'Update' : 'Submit' }}
+                    </button>
+                    <button type="button" class="popup-cancel" (click)="closePopup()">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="careunit-list">
+        <table class="careunit-table">
+            <tr>
+                <th>S.No</th>
+                <th>Care Unit Name</th>
+                <th>Actions</th>
+            </tr>
+            <tr *ngFor="let careunit of careunitsArray; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ careunit.name }}</td>
+                
+    <td class="table-actions">
+                    <button class="edit-btn" (click)="onEdit(i)">EDIT</button>
+                    <button class="delete-btn" (click)="onDelete(careunit)">DELETE</button>            </td>
+            </tr>
+        </table>
+    </div>
+</div>

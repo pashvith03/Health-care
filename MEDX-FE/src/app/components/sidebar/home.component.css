@@ -1,0 +1,115 @@
+.sidebar {
+    width: 130px;
+    height: calc(100vh - 56px); /* Full height minus navbar */
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    position: fixed;
+    left: 0;
+    top: 56px; /* Start right below navbar */
+    overflow-y: auto;
+    padding-top: 10px;
+}
+
+/* Sidebar List */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+/* Sidebar Items */
+.sidebar li {
+    margin: 8px 12px;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+.sidebar li:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+.sidebar li.active {
+    background: rgba(81, 81, 194, 0.9);
+    box-shadow: 0 5px 20px rgba(81, 81, 194, 0.3);
+    border: 1px solid rgba(81, 81, 194, 0.5);
+}
+
+/* Sidebar Icons */
+.sidebar li i {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 8px;
+    padding: 8px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+.sidebar li.active i {
+    background: rgba(255, 255, 255, 0.2);
+}
+.sidebar li svg {
+    transition: all 0.3s ease;
+}
+.sidebar li svg path,
+.sidebar li svg line,
+.sidebar li svg polyline {
+    fill: #ffffff;
+    stroke: #ffffff;
+}
+.sidebar li.active svg path,
+.sidebar li.active svg line,
+.sidebar li.active svg polyline {
+    fill: rgb(81, 81, 194);
+    stroke: rgb(81, 81, 194);
+}
+
+/* Sidebar Text */
+.sidebar li span {
+    font-size: 14px;
+    font-weight: 500;
+    color: #ffffff;
+    margin-top: 4px;
+    opacity: 0.9;
+    transition: all 0.3s ease;
+}
+.sidebar li.active span {
+    font-weight: 600;
+    opacity: 1;
+    color: #ffffff;
+}
+
+/* Main Content Adjust */
+.main-content {
+    margin-left: 130px; /* same width as sidebar */
+    padding: 30px;
+    min-height: calc(100vh - 56px);
+    margin-top: 56px; /* space for navbar */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .sidebar {
+        width: 200px;
+    }
+    .main-content {
+        margin-left: 200px;
+        padding: 20px;
+    }
+    .sidebar li {
+        padding: 12px 15px;
+        margin: 6px 8px;
+    }
+    .sidebar li span {
+        font-size: 12px;
+    }
+}
